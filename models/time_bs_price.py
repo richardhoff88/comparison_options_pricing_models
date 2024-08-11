@@ -3,6 +3,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
+"""
+Parameters:
+
+S - current asset price
+K - strike price of option
+T - time to maturity (option expiration)
+r - risk free rate
+sigma - annualized volatility of the asset's returns
+
+
+
+"""
 N = norm.cdf
 
 def BS_CALL(S, K, T, r, sigma):
