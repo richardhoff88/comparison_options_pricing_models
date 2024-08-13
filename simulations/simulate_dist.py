@@ -11,9 +11,11 @@ def black_scholes_call(S, K, T, r, sigma):
 def generate_price_path(S0, mu, sigma, T, N):
     """
     Geometric Brownian Motion (GBM)
-    A common model for simulating asset prices is Geometric Brownian Motion (GBM). It assumes that the asset price follows a log-normal distribution.
+    Common model for simulating asset prices. 
+    It assumes that the asset price follows a log-normal distribution.
+    Don't have access to historical financial data.
 
-    Here's the basic equation for GBM:
+    Basic equation for GBM:
 
     dS = S * (mu * dt + sigma * dW)
     

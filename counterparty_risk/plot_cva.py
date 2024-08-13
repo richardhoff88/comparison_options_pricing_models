@@ -1,3 +1,12 @@
+"""
+Parameters:
+ee - expected exposure
+pd - probability of default
+r - risk-free rate
+t - time to maturity
+
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -63,12 +72,6 @@ def cva_delta_exposure(t, ee_function, pd_function, r):
 def plot_cva(time_range, ee_function, pd_function, r):
   """
   Plots CVA over time.
-
-  Args:
-      time_range: A numpy array of time points
-      ee_function: Function to calculate EE at a given time
-      pd_function: Function to calculate PD at a given time
-      r: Risk-free rate
   """
   cva_values = [cva_delta_exposure(t, ee_function, pd_function, r) for t in time_range]
   plt.plot(time_range, cva_values)
@@ -77,15 +80,31 @@ def plot_cva(time_range, ee_function, pd_function, r):
   plt.title("CVA Over Time")
   plt.show()
 
-def ee_example(t):
-  # replace with  actual EE function
-  return 10000 + 1000 * t
+def expected_exposure(time_grid, exposure_profile):
+  """
+  linear interpolation to calculate expected exposure.
+  more straightforward option than Monte Carlo simulation
+  (which would be better)
+  """
+  ee = np.interp(time_grid, time_grid, exposure_profile)
+  ee[ee < 0] = 0 
+  return ee
+
+def cva_sensitivity_analysis(ee_values, pd, r, t):
+  """
+  Calculates CVA for different expected exposure values.
+  """
+  cva_values = []
+  for ee in ee_values:
+      cva = cva_delta_exposure(ee, pd, r, t)
+      cva_values.append(cva)
+  return cva_values
 
 def pd_example(t):
-  # replace with  actual PD function
+  # replace this
   return 0.01 + 0.001 * t
 
 time_range = np.linspace(0, 5, 100)
 r = 0.05
 
-plot_cva(time_range, ee_example, pd_example, r)
+plot_cva(time_range, expected_exposure, pd_example, r)
