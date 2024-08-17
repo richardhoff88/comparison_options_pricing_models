@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
+# from ..counterparty_risk import cva
 
 def black_scholes_call(S, K, T, r, sigma):
     d1 = (np.log(S/K) + (r + sigma**2/2)*T) / (sigma*np.sqrt(T))

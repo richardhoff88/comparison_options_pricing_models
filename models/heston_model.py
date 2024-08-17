@@ -14,6 +14,8 @@ T = 1
 
 def generate_heston_paths(S, T, r, kappa, theta, v_0, rho, xi, 
                           steps, Npaths, return_vol=False):
+    
+    pricedict = {}
     dt = T/steps
     size = (Npaths, steps)
     prices = np.zeros(size)
@@ -34,6 +36,7 @@ def generate_heston_paths(S, T, r, kappa, theta, v_0, rho, xi,
     if return_vol:
         return prices, sigs
     
+    print(prices)
     return prices
 
 
@@ -43,7 +46,6 @@ rho = -0.7
 W = generate_heston_paths(S, T, r, kappa, theta, v_0, rho, xi, 
                           steps, paths, return_vol=False)
 
-# Plotting the first 10 simulated paths
 plt.plot(W[:10].T)
 plt.title('Simulated Stock Price Paths under Heston Model')
 plt.xlabel('Time Steps')
