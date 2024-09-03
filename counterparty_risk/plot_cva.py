@@ -60,8 +60,7 @@ def cva_delta_exposure(t, ee_function, pd_function, r):
       pd_function: Function to calculate PD at a given time
       r: Risk-free rate
 
-  Returns:
-      Credit Value Adjustment (CVA) at time t
+  returns CVA
   """
   ee = expected_exposure(t, ee_function)
   pd = probability_of_default(t, pd_function)
